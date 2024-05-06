@@ -14,7 +14,7 @@ export async function POST(request: Request) {
       isVerified: true,
     });
 
-    if (!existingVerifiedUserbyUserName) {
+    if (existingVerifiedUserbyUserName) {
       return Response.json(
         {
           success: false,
