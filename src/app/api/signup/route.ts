@@ -47,16 +47,10 @@ export async function POST(request: Request) {
           },
         );
       } else {
-        const newUser = new UserModel({
-          username,
-          email,
-          password: hashedPassword,
-          verifyCode,
-          verifyCodeExpiry: expiryDate,
-          isVerified: false,
-          reviews: [],
-        });
-        await newUser.save();
+        existingUserbyEmail.password = hashedPassword;
+        existingUserbyEmail.verifyCode = verifyCode;
+        existingUserbyEmail.verifyCodeExpiry = expiryDate;
+        await existingUserbyEmail.save();
       }
     } else {
       const newUser = new UserModel({
